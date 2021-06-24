@@ -1,16 +1,15 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Ingredient from './Ingredient'
 
 
-export default class IngredientList extends Component {
+const IngredientList = (props) => {
 
     
 	// map over an array of ingredients
 	// create an ingredient component for each item in the array
 
-	render(){
-		let ingredientComponents = this.props.ingredients.map(item => (
-			<li onClick={(e) => {this.props.addToBurger(e)}}>
+		let ingredientComponents = props.ingredients.map(item => (
+			<li onClick={(e) => {props.addToBurger(e)}}>
 				<Ingredient ingredient={item.name} color={item.color} />
 			</li>
 		))
@@ -21,4 +20,6 @@ export default class IngredientList extends Component {
 			</ul>
 		)
 	}
-}
+
+
+export default IngredientList

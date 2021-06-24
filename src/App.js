@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import IngredientList from './IngredientList'
 import './App.css'
 import BurgerPane from './BurgerPane'
