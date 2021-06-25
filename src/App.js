@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {Component, useState} from 'react'
 import IngredientList from './IngredientList'
 import './App.css'
 import BurgerPane from './BurgerPane'
@@ -15,41 +15,44 @@ const ingredients = [
 	{name: 'Lettuce', color: 'lawngreen'},
 	{name: 'Tomato', color: 'tomato'},
 	{name: 'Bacon', color: 'maroon'},
-	{name: 'Onion', color: 'lightyellow'}
+	{name: 'Onion', color: 'lightyellow'},
+	{name: 'Animal Style', color: '#ee9b00'}
   ]
 
-export default class App extends Component {
+const App = (props) => {
 
-constructor(props){
-  super()
-  this.state = {
-    clickedIngredients: []
-  }
-}
 
-addToBurger = (e) => {
+const [clickedIngredients, setClickedIngredients] = useState([])
+
+// constructor(props){
+//   super()
+//   this.state = {
+//     clickedIngredients: []
+//   }
+// }
+
+const addToBurger = (e) => {
 	// get value of clicked ingredient and color
 	const newIngredient = {name: e.target.innerText, color: e.target.style.backgroundColor}
 	// create a new array with current clicked ingredient
-	const updatedClickedIngredients = this.state.clickedIngredients.concat(newIngredient)
+	const updatedClickedIngredients = clickedIngredients.concat(newIngredient)
 	// setState with new clickIngredients array
-	this.setState({
-		clickedIngredients: updatedClickedIngredients
-	})
+
+	setClickedIngredients(updatedClickedIngredients) 
 }
 
-clearBurger = (e) => {
-	this.setState({
-		clickedIngredients: []
-	})
+const clearBurger = (e) => {
+	setClickedIngredients([])
 }
 
-	render (){
+
 		return (
 			<div style={{display: "flex", alignItems:"flex-end" }}>
-				<IngredientList ingredients={ingredients} addToBurger={this.addToBurger}/>
-				<h1><BurgerPane clickedIngredients={this.state.clickedIngredients} clearBurger={this.clearBurger} /></h1>
+				<IngredientList ingredients={ingredients} addToBurger={addToBurger}/>
+				<h1><BurgerPane clickedIngredients={clickedIngredients} clearBurger={clearBurger} /></h1>
 			</div>
 		)
 	}
-}
+
+
+export default App
